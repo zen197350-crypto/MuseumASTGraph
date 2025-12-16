@@ -7,7 +7,7 @@ export interface GraphViewerRef {
   zoomOut: () => void;
   pan: (dx: number, dy: number) => void;
   resetZoom: () => void;
-  exportAsPng: () => void;
+  exportAsSvg: () => void;
 }
 
 interface GraphViewerProps {
@@ -836,54 +836,20 @@ const GraphViewer = forwardRef<GraphViewerRef, GraphViewerProps>(({
       );
       savedTransform.current = d3.zoomIdentity;
     },
-    exportAsPng: () => {
-      if (!svgRef.current) return;
-      const svgNode = svgRef.current.node() as SVGSVGElement;
+    exportAsSvg: () => {
+      if (!svgContent) return;
       
-      const serializer = new XMLSerializer();
-      let source = serializer.serializeToString(svgNode);
-
-      // Add namespaces
-      if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
-          source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
-      }
-      if(!source.match(/^<svg[^>]+xmlns:xlink/)){
-          source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
-      }
-
-      source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
-      const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
-      
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
-      const rect = svgNode.getBoundingClientRect();
-      const scale = 2; // Retina quality
-      
-      canvas.width = rect.width * scale;
-      canvas.height = rect.height * scale;
-      
-      const image = new Image();
-      image.onload = () => {
-        if (context) {
-           // Fill white background
-           context.fillStyle = '#ffffff';
-           context.fillRect(0, 0, canvas.width, canvas.height);
-           
-           context.scale(scale, scale);
-           context.drawImage(image, 0, 0);
-           
-           const pngUrl = canvas.toDataURL("image/png");
-           const downloadLink = document.createElement("a");
-           downloadLink.href = pngUrl;
-           downloadLink.download = `graphviz-export-${Date.now()}.png`;
-           document.body.appendChild(downloadLink);
-           downloadLink.click();
-           document.body.removeChild(downloadLink);
-        }
-      };
-      image.src = url;
+      const blob = new Blob([svgContent], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.createElement("a");
+      downloadLink.href = url;
+      downloadLink.download = `graphviz-${Date.now()}.svg`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(url);
     }
-  }), [selectedNodeId]);
+  }), [selectedNodeId, svgContent]);
 
   return (
     <div 

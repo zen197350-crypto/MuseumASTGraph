@@ -98,8 +98,8 @@ function App() {
     }
   };
 
-  const handleExportPng = () => {
-    viewerRef.current?.exportAsPng();
+  const handleExportSvg = () => {
+    viewerRef.current?.exportAsSvg();
   };
 
   return (
@@ -153,7 +153,7 @@ function App() {
             onToggleFancy={toggleFancyMode}
             isFreeMove={isFreeMove}
             onToggleFreeMove={() => setIsFreeMove(!isFreeMove)}
-            onExportPng={handleExportPng}
+            onExportSvg={handleExportSvg}
           />
         </div>
       </main>

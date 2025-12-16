@@ -1,8 +1,10 @@
 import { Graphviz } from '@hpcc-js/wasm';
 
-let graphvizInstance: Graphviz | null = null;
+type GraphvizInstance = Awaited<ReturnType<typeof Graphviz.load>>;
 
-export const getGraphvizInstance = async (): Promise<Graphviz> => {
+let graphvizInstance: GraphvizInstance | null = null;
+
+export const getGraphvizInstance = async (): Promise<GraphvizInstance> => {
   if (!graphvizInstance) {
     try {
       graphvizInstance = await Graphviz.load();
@@ -36,5 +38,5 @@ const injectForcedStyles = (dot: string): string => {
 export const layoutDot = async (dot: string, engine: string = 'dot'): Promise<string> => {
   const gv = await getGraphvizInstance();
   const enhancedDot = injectForcedStyles(dot);
-  return gv.layout(enhancedDot, "svg", engine);
+  return gv.layout(enhancedDot, "svg", engine as any);
 };

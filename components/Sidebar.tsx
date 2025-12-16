@@ -191,7 +191,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         };
         
         setExamples(prev => [...prev, newPreset]);
-        setActiveTab('editor');
+        setActiveTab('info');
       }
     };
     reader.readAsText(file);
@@ -227,7 +227,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const loadExample = (exampleCode: string) => {
     onCodeChange(exampleCode);
     onUpdate(exampleCode);
-    setActiveTab('editor');
+    setActiveTab('info');
   };
 
   const handleSavePreset = async () => {
