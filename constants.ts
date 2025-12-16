@@ -32,8 +32,8 @@ export const INITIAL_DOT_CODE = `digraph G {
 
 export const EXAMPLE_GRAPHS = [
   {
-    name: "Эксперементаниум",
-    description: "Акторно-сетевая структура музея Эксперементаниум (общая экспозиция)",
+    name: "Экспериментаниум",
+    description: "Акторно-сетевая структура музея Экспериментаниум (общая экспозиция)",
     code: `digraph G {
   // --- Глобальные атрибуты визуализации ---
   layout="neato";
