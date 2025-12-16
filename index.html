@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GraphViz Live Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom scrollbar for code editor */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #1e1e1e;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #444;
+        border-radius: 5px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      /* Dot pattern background */
+      .bg-dot-pattern {
+        background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+
+      /* Graph Interactivity */
+      .graph-svg .node {
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .graph-svg .edge {
+        transition: opacity 0.2s;
+      }
+      
+      /* Dimming state */
+      .graph-svg.has-selection .node,
+      .graph-svg.has-selection .edge {
+        opacity: 0.1;
+      }
+      
+      .graph-svg.has-selection .node.selected,
+      .graph-svg.has-selection .node.connected,
+      .graph-svg.has-selection .edge.connected {
+        opacity: 1;
+      }
+
+      /* Selection Styles */
+      .graph-svg .node.selected polygon,
+      .graph-svg .node.selected ellipse,
+      .graph-svg .node.selected path {
+        stroke: #2563eb !important; /* blue-600 */
+        stroke-width: 3px !important;
+        fill: #dbeafe !important; /* blue-100 */
+      }
+      
+      .graph-svg .edge.connected path {
+        stroke: #2563eb !important;
+        stroke-width: 2px !important;
+      }
+      .graph-svg .edge.connected polygon {
+        stroke: #2563eb !important;
+        fill: #2563eb !important;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900 h-screen overflow-hidden">
+    <div id="root" class="h-full"></div>
+  </body>
+</html>

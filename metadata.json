@@ -1,0 +1,5 @@
+{
+  "name": "Copy of GraphViz Live Editor",
+  "description": "A robust, real-time Graphviz DOT language editor and visualizer. Write DOT code and see your graph instantly rendered using the Graphviz engine.",
+  "requestFramePermissions": []
+}
