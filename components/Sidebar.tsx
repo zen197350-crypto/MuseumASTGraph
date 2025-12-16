@@ -192,6 +192,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         
         setExamples(prev => [...prev, newPreset]);
         setActiveTab('info');
+        setSearchQuery(''); // Reset search to ensure new data is visible
       }
     };
     reader.readAsText(file);
@@ -228,6 +229,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     onCodeChange(exampleCode);
     onUpdate(exampleCode);
     setActiveTab('info');
+    setSearchQuery(''); // Reset search to ensure new data is visible
   };
 
   const handleSavePreset = async () => {

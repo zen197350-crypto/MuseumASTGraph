@@ -4,11 +4,11 @@ import GraphViewer, { GraphViewerRef } from './components/GraphViewer';
 import Toolbar from './components/Toolbar';
 import { layoutDot } from './services/graphvizService';
 import { modifyDotCode } from './services/dotModifier';
-import { INITIAL_DOT_CODE } from './constants';
+import { INITIAL_DOT_CODE, EXAMPLE_GRAPHS } from './constants';
 import { GraphData, CosmeticAction } from './types';
 
 function App() {
-  const [code, setCode] = useState<string>(INITIAL_DOT_CODE);
+  const [code, setCode] = useState<string>(EXAMPLE_GRAPHS[0]?.code || INITIAL_DOT_CODE);
   const [svgOutput, setSvgOutput] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isRendering, setIsRendering] = useState<boolean>(false);
@@ -52,7 +52,7 @@ function App() {
 
   // Initial render
   useEffect(() => {
-    handleUpdateGraph(INITIAL_DOT_CODE);
+    handleUpdateGraph(EXAMPLE_GRAPHS[0]?.code || INITIAL_DOT_CODE);
   }, [handleUpdateGraph]);
 
   const handleCosmeticAction = (action: CosmeticAction) => {
