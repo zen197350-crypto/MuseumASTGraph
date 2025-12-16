@@ -62,7 +62,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   useEffect(() => {
     const fetchFromBackend = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/presets');
+        // Use relative path for production deployment via Nginx
+        const response = await fetch('/api/presets');
         if (response.ok) {
           const remotePresets: ExampleGraph[] = await response.json();
           setServerStatus('connected');
@@ -248,7 +249,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     // Attempt to Save to Backend
     if (serverStatus === 'connected') {
       try {
-        await fetch('http://localhost:5000/api/presets', {
+        await fetch('/api/presets', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

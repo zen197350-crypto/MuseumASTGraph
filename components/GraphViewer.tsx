@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef } from 'react';
-import * as d3 from 'https://esm.sh/d3@7';
+import * as d3 from 'd3';
 import { GraphData, GraphNode, GraphEdge } from '../types';
 
 export interface GraphViewerRef {

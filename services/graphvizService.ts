@@ -1,4 +1,4 @@
-import { Graphviz } from 'https://esm.sh/@hpcc-js/wasm@2.16.2';
+import { Graphviz } from '@hpcc-js/wasm';
 
 let graphvizInstance: Graphviz | null = null;
 
